@@ -56,7 +56,6 @@ AV.Cloud.define('hourlyReport', function(request) {
 			var requested = 0;
 			
 			for (var id in stores) {
-			//var id = 0;
 				var s = stores[id];
 				var key = s.get('key');
 				var id = s.get('id');
@@ -64,10 +63,11 @@ AV.Cloud.define('hourlyReport', function(request) {
 								
 				var opt = {
 					hostname: 'api.leancloud.cn',
-					path: '/1.1/classes/Snapshot' + index + '?order=-date&limit=1',
+					path: '/1.1/classes/Snapshot' + index + '?order=-createdAt&limit=1',
 					headers: {
 						"X-LC-Id": id,
-						"X-LC-Key": key
+						"X-LC-Key": key,
+						"X-Index": index
 					}
 				};
 				
@@ -102,6 +102,7 @@ AV.Cloud.define('hourlyReport', function(request) {
 							const data = d.results[0];
 							results.push({
 								id: res.req.getHeader('X-LC-Id'),
+								index: res.req.getHeader('X-Index'),
 								orders: data.orders,
 								cup: data.cup,
 								sales: data.sales
