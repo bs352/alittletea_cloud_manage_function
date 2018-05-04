@@ -143,7 +143,7 @@ AV.Cloud.define('CollectReport', function(request) {
 								const d = JSON.parse(rawData);
 								const data = d.results[0];
 								//console.log(data);
-								if (new Date(data.date.iso) != (new Date()).getDate()) {
+								if (new Date(data.date.iso).getDate() != (new Date()).getDate()) {
 									data.orders = 0;
 									data.cup = 0;
 									data.sales = 0;
