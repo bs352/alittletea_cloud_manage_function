@@ -142,6 +142,12 @@ AV.Cloud.define('CollectReport', function(request) {
 								requested++;
 								const d = JSON.parse(rawData);
 								const data = d.results[0];
+								//console.log(data);
+								if (new Date(data.date.iso) != (new Date()).getDate()) {
+									data.orders = 0;
+									data.cup = 0;
+									data.sales = 0;
+								}
 								results.push({
 									id: res.req.getHeader('X-LC-Id'),
 									index: res.req.getHeader('X-Index'),
@@ -155,6 +161,7 @@ AV.Cloud.define('CollectReport', function(request) {
 									var report = new HourlyReport();
 									report.set('details', results);
 									report.save();
+									//console.log(report);
 								}
 							} catch (e) {
 							  console.error(e.message);
