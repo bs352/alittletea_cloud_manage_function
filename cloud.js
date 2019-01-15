@@ -147,13 +147,15 @@ AV.Cloud.define('CollectReport', function(request) {
 									data.orders = 0;
 									data.cup = 0;
 									data.sales = 0;
+									data.details = [];
 								}
 								results.push({
 									id: res.req.getHeader('X-LC-Id'),
 									index: res.req.getHeader('X-Index'),
 									orders: data.orders,
 									cup: data.cup,
-									sales: data.sales
+									sales: data.sales,
+									details: data.details
 								});
 							  
 								if (requested == stores.length) {
