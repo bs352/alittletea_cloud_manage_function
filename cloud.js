@@ -147,8 +147,8 @@ AV.Cloud.define('CollectReport', function(request) {
 									data.orders = 0;
 									data.cup = 0;
 									data.sales = 0;
-									data.details = [];
 								}
+								data.details = data.details || [];
 								results.push({
 									id: res.req.getHeader('X-LC-Id'),
 									index: res.req.getHeader('X-Index'),
